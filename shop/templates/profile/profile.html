@@ -1,0 +1,102 @@
+{% extends "common_code/base.html" %}
+{% load static %}
+<title>{% block title %}Ogani | profile{% endblock title %} </title>
+{% block content %}
+
+<div class="container rounded bg-white mb-2">
+    <div class="row">
+        <!-- profile main content start-->
+        <div class="col-md-3 col-lg-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center">
+                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <span class="font-weight-bold">{{request.user | capfirst}}</span>
+                <span class="text-black-50">{{request.user.email}}</span>
+            </div>
+
+            <ul class="list-group list-group-flush pt-5">
+                <li class="list-group-item">
+                    <a class="color_item" href="{% url 'profile' %}"> My profile </a>
+                 </li>
+                <li class="list-group-item">
+                   <a class="color_item" href="{% url 'address_book' %}"> Address book</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="color_item" href="{% url 'add_address' %}">Add Delivery address</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="color_item" href=""> My reviews</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="color_item" href="{% url 'orders' %}"> All orders</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="color_item" href="{% url 'change_pass' %}">Change password</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="color_item" href="{% url 'logout' %}">Logout</a>
+                </li>
+              </ul>
+
+        </div>
+        
+        <!-- profile main content start end -->
+
+
+    
+        <div class="col-md-5 col-lg-8 m-5">
+            <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">
+                        <p>Name :</p>
+                      </h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <p>{{request.user}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">
+                        <p>Email :</p>
+                      </h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <p>{{request.user.email}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">
+                        <p>address :</p>
+                      </h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <p></p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">
+                        <p>Number :</p>
+                      </h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <p>+880 </p>
+                    </div>
+                  </div>
+                  
+                  
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+
+{% endblock content %}

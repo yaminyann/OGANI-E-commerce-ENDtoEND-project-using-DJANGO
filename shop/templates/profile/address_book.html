@@ -1,0 +1,94 @@
+{% extends "common_code/base.html" %}
+{% load static %}
+<title>{% block title %}Ogani|address book{% endblock title %} </title>
+
+{% block content %}
+
+<div class="container rounded bg-white mb-2">
+    <div class="row">
+        <!-- profile main content start-->
+        <div class="col-md-3 col-lg-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center">
+                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <span class="font-weight-bold">{{request.user | capfirst}}</span>
+                <span class="text-black-50">{{request.user.email}}</span>
+            </div>
+
+            <ul class="list-group list-group-flush pt-5">
+                <li class="list-group-item">
+                    <a class="color_item" href="{% url 'profile' %}"> My profile </a>
+                 </li>
+                <li class="list-group-item">
+                   <a class="color_item" href="{% url 'address_book' %}"> Address book</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="color_item" href="{% url 'add_address' %}">Add Delivery address</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="color_item" href=""> My reviews</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="color_item" href="{% url 'orders' %}">All orders</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="color_item" href="">Change password</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="color_item" href="{% url 'logout' %}">Logout</a>
+                </li>
+              </ul>
+
+        </div>
+        
+        <!-- profile main content start end -->
+
+        <!-- address book start -->
+        <div class="col-md-5 col-lg-8 m-5">
+            <div class="row">
+                {% for address in address %}
+                <div class="py-2 ml-4">
+                    <div class="card card-margin">
+                        <div class="card-header no-border">
+                            <h5 class="card-title">{{address.forloop.counter}}</h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="widget-49">
+                                <div class="widget-49-title-wrapper">
+                                    <div class="widget-49-date-primary">
+                                        <h6>Name : {{address.name}}</h6>
+                                    </div>
+                                    <div class="widget-49-meeting-info">
+                                        <h6>Division : <span>{{address.division}},</span> <span>{{address.district}},</span> <span>{{address.zipcode}}</span></h6>
+                                    </div>
+                                    <div class="widget-49-meeting-info">
+                                        <h6>Area : <span>{{address.area}}.</span></h6>
+                                    </div>
+                                    <div class="widget-49-meeting-info">
+                                        <h6>Number : <span>{{address.mobile}}</span></h6>
+                                    </div>
+                                    <div class="widget-49-meeting-info">
+                                        <h6>Effective delivery : <span>{{address.effective_delivery}}</span></h6>
+                                    </div>
+                                </div>
+                                
+                                <div class="widget-49-meeting-action pt-3">
+                                  <a class="btn btn-success" href="">Edit</a>
+                                  <a class="btn btn-danger" href="">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+        <!-- address book end -->
+
+
+
+    </div>
+</div>
+
+        
+{% endblock content %}

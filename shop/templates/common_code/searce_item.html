@@ -1,0 +1,49 @@
+{% extends "common_code/base.html" %}
+{% load static %}
+{% block content %}
+
+{% if searce_item %}
+<div class="container">
+    <p class="text-center">Total {{total}} item found !</p>
+    <div class="row">
+        {% for item in searce_item %}
+        <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables vegetables">
+            <div class="featured__item">
+                <div class="featured__item__pic set-bg" data-setbg="{{item.p_image.url}}">
+                    <ul class="featured__item__pic__hover">
+                        <li>
+                            <form action="/addTowishlist" class="d-inline">
+                                <input type="hidden" name="product_ID" value={{item.id}} id="product_ID">
+                                <li><button type="submit" style="border:none; overflow:hidden; background-color: transparent;"><a ><i class="fa fa-heart"></i></a></button></li>
+                            </form>
+                        </li>
+                        <li><a ><i class="fa fa-retweet"></i></a></li>
+                        <li>
+                            <form action="/addTocart" class="d-inline">
+                                <input type="hidden" name="product_ID" value={{item.id}} id="product_ID">
+                                <li><button type="submit" style="border:none; overflow:hidden; background-color: transparent;"><a type="submit"><i class="fa fa-shopping-cart"></i></a></button></li>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <div class="featured__item__text">
+                    <h6><a href="{% url 'product_details' item.id %}">{{item.title}}</a></h6>
+                    <h5>৳ {{item.discount_price}}</h5>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+ </div>
+
+{% else %}
+<div class="container mb-5 py-5">
+    <div class="text-center">
+        <p>Search item not found !</p>
+        <img src="{% static 'img/nf.jpg' %}" alt="" height="300px" width="300px">
+    </div>
+</div>
+{% endif %}
+
+
+{% endblock content %}

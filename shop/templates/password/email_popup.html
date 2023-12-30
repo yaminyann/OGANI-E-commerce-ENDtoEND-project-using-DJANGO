@@ -1,0 +1,18 @@
+{% extends "common_code/base.html" %}
+{% load static %}
+<title>{% block title %}Ogani|email send{% endblock title %} </title>
+
+{% block content %}
+<section class="py-5">
+    <div class="container py-5">
+        <div class=" text-center py-5">
+            <div class="breadcrumb-text mb-2">
+                <p>Email has sent ! Please check your</p><a href="https://mail.google.com/mail/u/0/#inbox">Email<i class="fa-solid fa-envelope"></i></a>
+            </div>
+            <div class="py-4">
+                <img  src="{% static 'img/bird-animation-1.gif' %}"  alt="" >
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

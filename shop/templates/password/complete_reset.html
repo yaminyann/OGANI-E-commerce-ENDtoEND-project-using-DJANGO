@@ -1,0 +1,19 @@
+{% extends "common_code/base.html" %}
+{% load static %}
+<title>{% block title %}Ogani|Passeord reset successfully{% endblock title %} </title>
+
+
+{% block content %}
+<section class="mb-2">
+    <div class="container">
+        <div class=" text-center py-5">
+            <div class="breadcrumb-text mb-2">
+                <p>Password reset Successfully ! go to Login page </p><a href="{% url 'login' %}">Login <i class="fa-sharp fa-solid fa-arrow-right-to-bracket"></i></a>
+            </div>
+            <div class="py-4">
+                <img  src="{% static 'img/pass.png' %}"  alt="" >
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

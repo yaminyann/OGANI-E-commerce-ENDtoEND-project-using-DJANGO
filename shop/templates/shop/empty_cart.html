@@ -1,0 +1,48 @@
+{% extends "common_code/base.html" %}
+{% load static %}
+<title>{% block title %}Ogani | Cart{% endblock title %} </title>
+
+{% block content %}
+<div class="container py-3 mb-3 text-center">
+    <img src="{% static 'img/cart.png' %}" alt="" height="350px" widht="350px">
+    <p>Your cart is empty , go to <a class="color_item" href="{% url 'shop' %}">Shop</a> and buy exclusive offers Products !</p>
+</div>
+{% endblock content %}
+
+
+
+
+{% comment %} <div class="col-12 pb-1">
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center mb-3">
+        <li class="page-item">
+          <li class="page-link"  aria-label="Previous">
+           {% if items.has_previous %}
+           <a aria-hidden="true" href="?page=1">&laquo; First</a>
+           <a class="sr-only" href="?page={{ items.previous_page_number }}">Previous</a>
+           {% endif %}
+          </li>
+        </li>
+        
+        {% for i in items.paginator.page_range %}
+        {% if items.number == i %}
+        <li class="page-item active">
+          <a href="#" class="page-link">{{ i }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        <li class="page-item">
+          <li class="page-link"  aria-label="Next">
+            {% if items.has_next %}
+            <a aria-hidden="true" href="?page=1">Next</a>
+            <a class="sr-only" href="?page={{ items.paginator.num_pages }}">&raquo;</a>
+            {% endif %}
+          </li>
+        </li>
+      </ul>
+    </nav>
+  </div> {% endcomment %}

@@ -1,0 +1,18 @@
+{% extends "common_code/base.html" %}
+{% load static %}
+<title>{% block title %}Ogani | newsletter{% endblock title %} </title>
+{% block content %}
+<section class="py-5">
+    <div class="container py-5">
+        <div class=" text-center py-5">
+            <div class="breadcrumb-text mb-2">
+                <p>Thanks for subscribe, you will update soon !</p>
+            </div>
+            <div class="py-4">
+                <img  src="{% static 'img/nws.gif' %}"  alt="" height="500px" width="500px" >
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

@@ -1,0 +1,190 @@
+{% extends "common_code/base.html" %}
+{% load static %}
+<title>{% block title %}Ogani|Product|Details{% endblock title %} </title>
+{% block content %}
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>{{product.title}}</h2>
+                    <div class="breadcrumb__option">
+                        <a href="{% url 'home' %}">Home</a>
+                        <a href="#">{{product.category}}</a>
+                        <span>{{product.title}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+<!-- Product Details Section Begin -->
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__pic">
+                    <div class="product__details__pic__item">
+                        <img class="product__details__pic__item--large"
+                            src="{{product.p_image.url}}" alt="">
+                    </div>
+                    <div class="product__details__pic__slider owl-carousel">
+                        <img data-imgbigurl="{{product.p_image1.url}}"
+                            src="{{product.p_image1.url}}" alt="">
+                        <img data-imgbigurl="{{product.p_image2.url}}"
+                            src="{{product.p_image2.url}}" alt="">
+                        <img data-imgbigurl="{{product.p_image3.url}}"
+                            src="{{product.p_image3.url}}" alt="">
+                        <img data-imgbigurl="{{product.p_image4.url}}"
+                            src="{{product.p_image4.url}}" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__text">
+                    <h3>{{product.title}}</h3>
+                    <div class="product__details__rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                        <span>(18 reviews)</span>
+                    </div>
+                    <div class="product__details__price">{{product.discount_price}} ৳ </div>
+                    <p>{{product.discription}}</p>
+                    
+                    <!-- <div class="product__details__quantity">
+                        <div class="quantity">
+                          
+                            <a class="minus-cart btn" pid="{{product.id}}"><i class="fas fa-minus-square fa-lg"></i></a>
+                                <span id="quantity">{{cart.quantity}}</span>
+                           
+                            <a class="plus-cart btn" pid="{{product.id}}"><i class="fas fa-plus-square fa-lg"></i></a>
+                        </div>
+                    </div> -->
+
+                    <!--  add to cart & wishlist start -->
+                    {% if item_already_in_cart %}
+                        <a href="{% url 'cart' %}"><button type="submit" style="border:none" class="primary-btn">ADD TO CARD</button></a>
+                    {% else %}
+                    <form action="/addTocart" class="d-inline">
+                        <input type="hidden" name="product_ID" value={{product.id}} id="product_ID">
+                        <button type="submit" style="border:none" class="primary-btn">ADD TO CARD</button>
+                    </form>
+                    {% endif %}
+                    <form action="/addTowishlist" class="d-inline">
+                        <input type="hidden" name="product_ID" value={{product.id}}>
+                        <button type="submit" style="border:none" class="heart-icon"><span class="icon_heart_alt"></span></button>
+                    </form>
+                    <!--  add to cart & wishlist end -->
+                    <ul>
+                        <li><b>Availability</b> <span>{{product.availability}}</span></li>
+                        <li><b>Shipping</b> <span>01 day shipping. <samp>{{product.shipping}}</samp></span></li>
+                        <li><b>Weight</b> <span>{{product.weight}}</span></li>
+                        <li><b>Share on</b>
+                            <div class="share">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="product__details__tab">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                                aria-selected="true">Description</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
+                                aria-selected="false">Information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+                                aria-selected="false">Reviews <span>(1)</span></a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div class="product__details__tab__desc">
+                                <h6>Products Description</h6>
+                                <p>{{product.discription}}</p>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-2" role="tabpanel">
+                            <div class="product__details__tab__desc">
+                                <h6>Products Infomation</h6>
+                                <p>{{product.information}}</p>
+                                <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem
+                                    ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet
+                                    elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum
+                                    porta. Cras ultricies ligula sed magna dictum porta. Sed porttitor lectus
+                                    nibh. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-3" role="tabpanel">
+                            <div class="product__details__tab__desc">
+                                <h6>Products Reviews</h6>
+                                <p>{{product.reviews}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Details Section End -->
+
+<!-- Related Product Section Begin -->
+<section class="related-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title related__product__title">
+                    <h2>Related Product</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        {% for related in related_product %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="{{related.p_image.url}}">
+                        <ul class="product__item__pic__hover">
+                            <li>
+                            <!-- add item in wishlist -->
+                                <form action="/addTowishlist" class="d-inline">
+                                    <input type="hidden" name="product_ID" value={{related.id}} id="product_ID">
+                                    <li><button type="submit" style="border:none; overflow:hidden; background-color: transparent;"><a ><i class="fa fa-heart"></i></a></button></li>
+                                </form>
+                            </li>
+                            <li><a ><i class="fa fa-retweet"></i></a></li>
+                            <!-- add item in cart -->
+                            <li>
+                                <form action="/addTocart" class="d-inline">
+                                    <input type="hidden" name="product_ID" value={{related.id}} id="product_ID">
+                                    <li><button type="submit" style="border:none; overflow:hidden; background-color: transparent;"><a type="submit"><i class="fa fa-shopping-cart"></i></a></button></li>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="product__item__text">
+                        <h6><a href="{% url 'product_details' related.id %}">{{related.title}}</a></h6>
+                        <h5>৳ {{related.discount_price}}</h5>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Related Product Section End -->
+{% endblock content %}

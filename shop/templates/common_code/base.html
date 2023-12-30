@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} {% endblock title %} </title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+   
+    <style>
+        .form-control:focus {
+            border: none;
+            border-color: none !important;
+            -webkit-box-shadow: none!important;
+            -moz-box-shadow: none!important;
+            box-shadow: none!important;
+            }
+    </style>
+</head>
+ 
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="header__top" style="background-color:  #7fad39;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="header__top__left">
+                            <ul>
+                                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                                <li>Free Shipping for all Order of $99</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="header__top__right">
+                            <div class="header__top__right__social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                            </div>
+                            <div class="header__top__right__language">
+                                <img src="{% static 'img/language.png' %}" alt="">
+                                <div>English</div>
+                                <span class="arrow_carrot-down"></span>
+                                <ul>
+                                    <li><a href="#">Spanis</a></li>
+                                    <li><a href="#">English</a></li>
+                                </ul>
+                            </div>
+                            {% if user.is_authenticated %}
+                            <div class="header__top__right__auth">
+                                <a href="{% url 'logout' %}"><i class="fa fa-user"></i> Logout</a>
+                            </div>
+                            {% else %}
+                            <div class="header__top__right__auth">
+                                <a href="{% url 'login' %}"><i class="fa fa-user"></i> Login/Signup</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="header__logo">
+                        <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <nav class="header__menu">
+                        <ul>
+                            <li><a href="{% url 'home' %}">Home</a></li>
+                            <li class="active"><a href="{% url 'shop' %}">Shop</a></li>
+                            <li><a>Pages</a>
+                                <ul class="header__menu__dropdown">
+                                    <li><a href="{% url 'cart' %}">Shoping Cart</a></li>
+                                    <li><a href="{% url 'checkout' %}">Check Out</a></li>
+                                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="{% url 'blogs' %}">Blog</a></li>
+                            {% if user.is_authenticated %}
+                            <li><a>{{request.user}}</a>
+                                <ul class="header__menu__dropdown">
+                                    <li><a href="{% url 'profile' %}">Manage my account</a></li>
+                                    <li><a href="{% url 'wishlist_item' %}">My wishlist item</a></li>
+                                    <li><a href="{% url 'myOrder' %}">My Orders</a></li>
+                                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                                </ul>
+                            </li>
+                            {% else %}
+                            <li><a href="{% url 'contact' %}">Contact</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    <div class="header__cart">
+                        <ul>
+                            <li><a href="{% url 'wishlist_item' %}"><i class="fa fa-heart"></i> <span>{{total_item_in_wishlist}}</span></a></li>
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'cart' %}"><i class="fa fa-shopping-bag"></i> <span>{{total_item_in_cart}}</span></a></li>
+                        </ul>
+                        <div class="header__cart__price">item: <span>৳  {{ammount}}</span></div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Hero Section Begin -->
+    <section class="hero hero-normal">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>All departments</span>
+                        </div>
+                        <ul>
+                            <li><a href="{% url 'shop_page' 'meat' %}">Fresh Meat</a></li>
+                            <li><a href="{% url 'shop_page' 'vegetables' %}">Vegetables</a></li>
+                            <li><a href="{% url 'shop_page' 'fruits_and_nuts' %}">Fruit & Nut Gifts</a></li>
+                            <li><a href="{% url 'shop_page' 'berries' %}">Fresh Berries</a></li>
+                            <li><a href="{% url 'shop_page' 'ocean_foods' %}">Ocean Foods</a></li>
+                            <li><a href="{% url 'shop_page' 'butter_eggs' %}">Butter & Eggs</a></li>
+                            <li><a href="{% url 'shop_page' 'fastFood' %}">Fastfood</a></li>
+                            <li><a href="{% url 'shop_page' 'fresh_onion' %}">Fresh Onion</a></li>
+                            <li><a href="{% url 'shop_page' 'papaya_crisps' %}">Papayaya & Crisps</a></li>
+                            <li><a href="{% url 'shop_page' 'oatmeal' %}">Oatmeal</a></li>
+                            <li><a href="{% url 'shop_page' 'banana' %}">Fresh Bananas</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="{% url 'searce' %}" method="GET">
+                                <div class="hero__search__categories">
+                                    All Categories
+                                    <span class="arrow_carrot-down"></span>
+                                </div>
+                                    <input name="quary" type="text" placeholder="What do yo u need?">
+                                    <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+65 11.188.888</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+{% block content %}
+
+
+             <!-- main content -->
+
+{% endblock content %}
+ <!-- Footer Section Begin -->
+    <footer class="footer spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__about__logo">
+                            <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                        </div>
+                        <ul>
+                            <li>Address: 60-49 Road 11378 New York</li>
+                            <li>Phone: +65 11.188.888</li>
+                            <li>Email: hello@colorlib.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                    <div class="footer__widget">
+                        <h6>Useful Links</h6>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">About Our Shop</a></li>
+                            <li><a href="#">Secure Shopping</a></li>
+                            <li><a href="#">Delivery infomation</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Our Sitemap</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#">Who We Are</a></li>
+                            <li><a href="#">Our Services</a></li>
+                            <li><a href="#">Projects</a></li>
+                            <li><a href="{% url 'contact' %}">Contact</a></li>
+                            <li><a href="#">Innovation</a></li>
+                            <li><a href="#">Testimonials</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer__widget">
+                        <h6>Join Our Newsletter Now</h6>
+                        <p>Get E-mail updates about our latest shop and special offers.</p>
+                        {% if messages %}
+                            {% for msg in messages %}
+                                <p {% if msg.tags %} class="alert alert-{{msg.tags}} mb-3 py-2" {% endif %}>{{msg}}</p>
+                            {% endfor %}
+                        {% endif %}
+                        <form method="POST" action="/">
+                        {% csrf_token %}
+                            {{form.email}}
+                            <button type="submit" class="site-btn">Subscribe</button>
+                        </form>
+                        <div class="footer__widget__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__copyright">
+                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This E-commerce Development by <a href="https://github.com/yaminyann">@yaminyann</a> 
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
+                        <div class="footer__copyright__payment"><img src="{% static 'img/payment-item.png' %}" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/mixitup.min.js' %}"></script>
+    <script src="{% static 'js/myscript.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/ajax.js' %}"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+
+</html>

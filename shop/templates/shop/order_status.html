@@ -1,0 +1,84 @@
+{% extends "common_code/base.html" %}
+{% load static %}
+<title>{% block title %}Ogani | order status{% endblock title %} </title>
+<style>
+    
+</style>
+{% block content %}
+<div class="container-fluid">
+  <div class="container">
+      <!-- Title -->
+      <div class="d-flex justify-content-between align-items-center py-3">
+        <h2 class="h5 mb-0"><a href="#" class="text-muted"></a> Order #16123222</h2>
+      </div>
+    
+      <!-- Main content -->
+      <div class="row">
+        <div class="col-lg-12">
+          <!-- Details -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="mb-3 d-flex justify-content-between">
+                <div>
+                  <!-- <span class="me-3">22-11-2021</span> -->
+                  <span class="me-3">#16123222</span>
+                  <span class="me-3">Visa -1234</span>
+                  <span class="badge rounded-pill bg-info">SHIPPING</span>
+                </div>
+                <!-- <div class="d-flex">
+                  <button class="btn btn-link p-0 me-3 d-none d-lg-block btn-icon-text"><i class="bi bi-download"></i> <span class="text">Invoice</span></button>
+                  
+                </div> -->
+              </div>
+              <table class="table table-borderless">
+                <tbody>
+                  {% for status in status %}
+                  <tr>
+                    <td>
+                      <div class="d-flex ">
+                        <div class="flex-shrink-0">
+                          <img src="{{status.product.p_image.url}}" alt="" height="75px" width="75px" class="img-fluid">
+                        </div>
+                        <div class="flex-lg-grow-1 ms-3">
+                          <p class="ml-2"><a href="#" class="text-reset">{{status.product.title}}</a></p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Qunatity : {{status.quantity}}</td>
+                    <td class="text-end">Total : ৳ {{status.total}}</td>
+                    <td class="text-end">Date : {{status.order_date}}</td>
+                    <td class="text-end">Status : {{status.status}}</td>
+                  </tr>
+                  {% endfor %}
+                  
+                  
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="2">Subtotal</td>
+                    <td class="text-end">$159,98</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">Shipping</td>
+                    <td class="text-end">$20.00</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">Discount (Code: NEWYEAR)</td>
+                    <td class="text-danger text-end">-$10.00</td>
+                  </tr>
+                  <tr class="fw-bold">
+                    <td colspan="2">TOTAL</td>
+                    <td class="text-end">$169,98</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <!-- Payment -->
+         
+        </div>
+        
+      </div>
+  </div>
+</div>
+{% endblock content %}

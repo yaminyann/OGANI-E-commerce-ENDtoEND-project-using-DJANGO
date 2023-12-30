@@ -1,0 +1,89 @@
+{% extends "common_code/base.html" %}
+{% load static %}
+<title>{% block title %}Ogani | Checkout{% endblock title %} </title>
+
+{% block content %}
+<!-- Checkout Section Begin -->
+<section class="checkout spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h6><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click here</a> to enter your code
+                </h6>
+            </div>
+        </div>
+        <div class="checkout__form">
+            <h4>Billing Details</h4>
+            <form action="/orderStatus">
+                <div class="row">
+                    <div class="col-lg-8 col-md-6">
+                        <div class="row">
+                            {% for address in address %}
+                            <div class="card mb-2 " style="width:40rem;">
+                                <div class="card-body">
+                                    <div class="text-right">
+                                        <label>
+                                            Select address | 
+                                            <input type="radio" value="{{address.id}}" id="CustomarAddress{{forloop.counter}}" name="Customar_ID">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                  <h5 class="card-title">Address: {{forloop.counter}}</h5> 
+                                  <h5 class="card-subtitle mb-2 text-body-secondary">Name : {{address.name}}</h5>
+                                  <p class="card-text">Address: {{address.division}}, {{address.district}}, {{address.zipcode}} , {{address.area}}.</p>
+                                  <p>Effective Delivary : {{address.effective_delivery}}</p>
+                                  <p>mobile: {{address.mobile}}</p> 
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="checkout__order">
+                            <h4>Your Order</h4>
+                            <div class="checkout__order__products">Products <span>Total</span></div>
+                            <ul>
+                                {% for item in item %}
+                                <li>{{item.product.title}} <span>৳{{item.Subtotal}}</span></li>
+                                {% endfor %}
+                            </ul>
+                            <div class="checkout__order__subtotal">Subtotal <span id="ammount">৳{{ammount}}</span></div>
+                            <div class="checkout__order__total">Total <span id="total_ammount">৳{{total_ammount}}</span></div>
+                            <div class="checkout__input__checkbox">
+                                <label for="acc-or">
+                                    Create an account?
+                                    <input type="checkbox" id="acc-or">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
+                                ut labore et dolore magna aliqua.</p>
+                            <div class="checkout__input__checkbox">
+                                <label for="payment">
+                                    Check Payment
+                                    <input type="checkbox" id="payment">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="checkout__input__checkbox">
+                                <label for="paypal">
+                                    Paypal
+                                    <input type="checkbox" id="paypal">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <button type="submit" class="site-btn">PLACE ORDER</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<!-- Checkout Section End -->
+{% endblock content %}

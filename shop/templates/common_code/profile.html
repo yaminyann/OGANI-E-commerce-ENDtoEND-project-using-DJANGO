@@ -1,0 +1,30 @@
+{% extends "common_code/base.html" %}
+{% load static %}
+<title>{% block title %}Ogani | profile{% endblock title %} </title>
+{% block content %}
+
+<div class="container rounded bg-white mb-2">
+    <div class="row">
+        <!-- profile main content start-->
+        <div class="col-md-3 col-lg-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Yamin Yann</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
+
+            <div class="address_book">
+                <a class="btn" href="">address book</a>
+            </div>
+        </div>
+        <!-- profile main content start end -->
+
+
+    
+        <div class="col-md-5 col-lg-8 m-5">
+        {% block address_book %}
+          
+        {% endblock address_book %}
+        </div>
+       
+    </div>
+</div>
+
+
+{% endblock content %}

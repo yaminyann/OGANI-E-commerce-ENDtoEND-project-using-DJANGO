@@ -1,0 +1,48 @@
+{% extends "common_code/base.html" %}
+{% load static %}
+<title>{% block title %}Ogani | Wishlist{% endblock title %} </title>
+{% block content %}
+<!--Wishlist Area Strat-->
+<div class="wishlist-area pt-60 pb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <form action="#">
+                    <div class="table-content table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="li-product-remove">remove</th>
+                                    <th class="li-product-thumbnail">images</th>
+                                    <th class="cart-product-name">Product</th>
+                                    <th class="li-product-price">Unit Price</th>
+                                    <th class="li-product-stock-status">Stock Status</th>
+                                    <th class="li-product-add-cart">add to cart</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for wishlist in wishlist %}
+                                <tr >
+                                    <td class="li-product-remove"><a class="color_item" href="#"><i class="fa fa-times"></i></a></td>
+                                    <td class="li-product-thumbnail"><a href="#"><img src="{{wishlist.product.p_image.url}}" height="100px" width="100px" alt=""></a></td>
+                                    <td class="li-product-name"><a class="text-dark" href="{% url 'product_details' wishlist.product.id %}">{{wishlist.product.title}}</a></td>
+                                    <td class="li-product-price"><span class="amount">৳ {{wishlist.product.discount_price}}</span></td>
+                                    <td class="li-product-stock-status"><span class="in-stock">{{wishlist.product.availability}}</span></td>
+                                    <td class="li-product-add-cart">
+                                        <form action="/addTocart">
+                                            <input type="hidden" name="product_ID" value={{wishlist.product.id}} id="product_ID">
+                                            <button type="submit" style="border:none; overflow:hidden; background-color: transparent;">Add <i class="fa-solid fa-cart-shopping text-success"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Wishlist Area End-->
+{% endblock content %}
